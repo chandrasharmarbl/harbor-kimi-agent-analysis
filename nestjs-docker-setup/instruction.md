@@ -1,0 +1,1 @@
+Install docker with ansible, create docker compose file and expose latest postgresql and nestjs endpoint. Create a nestjs endpoint /checkdb and when firing GET request on this it should run SELECT 1; against running database. 
