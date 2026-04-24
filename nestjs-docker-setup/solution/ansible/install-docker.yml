@@ -1,0 +1,14 @@
+---
+- name: Install Docker
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+    - name: Install docker and compose
+      apt:
+        name:
+          - docker.io
+          - docker-compose-v2
+        state: present
