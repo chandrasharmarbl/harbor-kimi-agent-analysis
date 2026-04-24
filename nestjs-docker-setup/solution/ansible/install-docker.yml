@@ -3,6 +3,16 @@
   hosts: localhost
   connection: local
   tasks:
+    - name: Check if docker.sock is mounted
+      stat:
+        path: /var/run/docker.sock
+      register: docker_sock
+
+    - name: Fail if docker.sock is not mounted
+      fail:
+        msg: "docker.sock is not mounted. DooD setup requires the docker socket to be mounted."
+      when: not docker_sock.stat.exists
+
     - name: Update apt cache
       apt:
         update_cache: yes

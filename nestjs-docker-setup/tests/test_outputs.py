@@ -8,6 +8,7 @@ import subprocess
 import time
 import pytest
 import requests
+from network_bridge import python_network_bridge
 
 def test_containers_running():
     result = subprocess.run(
@@ -35,8 +36,8 @@ def test_ports_exposed():
     )
     assert result_5432.returncode == 0 and result_5432.stdout.strip() != "", "Port 5432 is not exposed/mapped on app-postgres"
 
-def test_checkdb_endpoint():
-    url = "http://host.docker.internal:8080/checkdb"
+def test_checkdb_endpoint(python_network_bridge):
+    url = "http://localhost:8080/checkdb"
     max_retries = 10
     success = False
     error_msg = ""
