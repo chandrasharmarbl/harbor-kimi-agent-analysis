@@ -8,4 +8,6 @@ cd $SCRIPT_DIR
 
 ansible-playbook ansible/install-docker.yml
 
+docker rm -f app-postgres app-nestjs || true
+
 docker compose up -d --build
