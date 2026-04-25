@@ -10,37 +10,49 @@ def get_docker_gateway_ip():
 def bridge_data(src, dst):
     try:
         while True:
-            data = src.recv(4096)
+            try:
+                data = src.recv(4096)
+            except (OSError, ConnectionResetError):
+                break
+                
             if not data:
                 break
             dst.sendall(data)
+    except Exception:
+        pass
     finally:
-        src.close()
-        dst.close()
+        try:
+            src.close()
+        except: pass
+        try:
+            dst.close()
+        except: pass
 
 def start_forwarding(local_port, remote_host, remote_port):
     def server_loop():
-        local_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        local_server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        local_server.bind(('127.0.0.1', local_port))
-        local_server.listen(10)
+        server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        server.bind(('127.0.0.1', local_port))
+        server.listen(128) 
         
         while True:
-            client_sock, addr = local_server.accept()
+            client_sock, _ = server.accept()
+            
+            remote_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            remote_sock.settimeout(2)
             
             try:
-                remote_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 remote_sock.connect((remote_host, remote_port))
+                remote_sock.settimeout(None)
                 
                 threading.Thread(target=bridge_data, args=(client_sock, remote_sock), daemon=True).start()
                 threading.Thread(target=bridge_data, args=(remote_sock, client_sock), daemon=True).start()
             except Exception as e:
-                print(f"Failed to connect to remote {remote_host}:{remote_port} - {e}")
                 client_sock.close()
+                remote_sock.close()
 
     t = threading.Thread(target=server_loop, daemon=True)
     t.start()
-    return t
 
 @pytest.fixture(scope="session", autouse=True)
 def python_network_bridge():
