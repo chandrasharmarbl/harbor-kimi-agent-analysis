@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   app-postgres:
     image: postgres:16-alpine
@@ -14,6 +13,8 @@ services:
       interval: 2s
       timeout: 2s
       retries: 5
+    networks:
+      - app-network
 
   app-nestjs:
     build:
@@ -21,7 +22,7 @@ services:
       dockerfile: Dockerfile
     container_name: app-nestjs
     ports:
-      - "8080:8080"
+      - "8080:3000"
     depends_on:
       app-postgres:
         condition: service_healthy
@@ -31,3 +32,9 @@ services:
       timeout: 3s
       retries: 10
       start_period: 5s
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,7 +1,14 @@
 Use ansible to install docker and compose. 
 
-Then, start two services using docker compose, a PostgreSQL database on default port named app-postgres and a NestJS application named app-nestjs. 
+## Container Requirements
 
-The NestJS application must include a GET endpoint at `/checkdb`. When this endpoint is accessed, the application should connect to the database, execute the query `SELECT 1;`, and return the result.
+Running two services -
+ -- app-nestjs (a NestJS application on default port)
+ -- app-postgres (a PostgreSQL database on default port)
 
-Test with a curl to the endpoint http://localhost:8080/checkdb to verify if it works.
+## NestJS app Requirements - 
+Include a GET endpoint at `/checkdb` wich shoudl connect to databaser, execute the query `SELECT 1;` and return the result.
+
+## Verfication Steps- 
+Pass tests with curl 
+- curl http://localhost:8080/checkdb to verify if it works.
