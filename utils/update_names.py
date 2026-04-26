@@ -8,7 +8,6 @@ readme_path = "/Users/chandrasharma/Projects/Harbor/README.md"
 
 job_dirs = glob.glob(os.path.join(jobs_dir, "*", "*"))
 
-# Map trial_name -> job_name
 trial_to_job = {}
 
 for trial_dir in job_dirs:
@@ -21,30 +20,23 @@ for trial_dir in job_dirs:
     
     trial_to_job[trial_name] = job_name
     
-    # Rename analysis file
     old_md = os.path.join(analysis_dir, f"{trial_name}.md")
     new_md = os.path.join(analysis_dir, f"{job_name}.md")
     
     if os.path.exists(old_md):
         os.rename(old_md, new_md)
-        # update title in the file just in case
         with open(new_md, 'r') as f:
             content = f.read()
         content = content.replace(f"# Analysis for {trial_name}", f"# Analysis for {job_name}")
         with open(new_md, 'w') as f:
             f.write(content)
 
-# Update README.md
 with open(readme_path, 'r') as f:
     readme_content = f.read()
 
-# Replace header: Trial Name -> Job Name
 readme_content = readme_content.replace("| Trial Name |", "| Job Name |")
 
-# Replace rows
 for trial_name, job_name in trial_to_job.items():
-    # We want to replace | nestjs-docker-setup__... | with | [2026-...](./analysis/2026-....md) |
-    # Use regex or simple string replace
     old_row_start = f"| {trial_name} |"
     new_row_start = f"| [{job_name}](./analysis/{job_name}.md) |"
     readme_content = readme_content.replace(old_row_start, new_row_start)
