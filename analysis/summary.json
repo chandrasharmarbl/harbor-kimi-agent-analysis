@@ -1,0 +1,90 @@
+[
+  {
+    "trial_name": "nestjs-docker-setup__A5zLeU3",
+    "success": true,
+    "cost": 0.0379398,
+    "tokens": 1125518,
+    "steps_count": 55,
+    "errors": []
+  },
+  {
+    "trial_name": "nestjs-docker-setup__MjP6nQF",
+    "success": false,
+    "cost": 0.036808099999999996,
+    "tokens": 797744,
+    "steps_count": 45,
+    "errors": []
+  },
+  {
+    "trial_name": "nestjs-docker-setup__M4iXgBq",
+    "success": false,
+    "cost": 0.0376575,
+    "tokens": 1293467,
+    "steps_count": 67,
+    "errors": []
+  },
+  {
+    "trial_name": "nestjs-docker-setup__SksMiDy",
+    "success": true,
+    "cost": 0.039585300000000004,
+    "tokens": 1368672,
+    "steps_count": 58,
+    "errors": []
+  },
+  {
+    "trial_name": "nestjs-docker-setup__72UxueH",
+    "success": true,
+    "cost": 0.062369100000000004,
+    "tokens": 2214214,
+    "steps_count": 61,
+    "errors": []
+  },
+  {
+    "trial_name": "nestjs-docker-setup__jSgHL3K",
+    "success": false,
+    "cost": 0.0,
+    "tokens": 0,
+    "steps_count": 0,
+    "errors": []
+  },
+  {
+    "trial_name": "nestjs-docker-setup__Dm2mgds",
+    "success": true,
+    "cost": 0.042749099999999984,
+    "tokens": 1533959,
+    "steps_count": 51,
+    "errors": []
+  },
+  {
+    "trial_name": "nestjs-docker-setup__UWc6Rgt",
+    "success": true,
+    "cost": 0.031377699999999994,
+    "tokens": 992775,
+    "steps_count": 52,
+    "errors": []
+  },
+  {
+    "trial_name": "nestjs-docker-setup__c3cgBWy",
+    "success": true,
+    "cost": 0.036679,
+    "tokens": 1211372,
+    "steps_count": 53,
+    "errors": []
+  },
+  {
+    "trial_name": "nestjs-docker-setup__LTLGDLN",
+    "success": true,
+    "cost": 0.023556699999999996,
+    "tokens": 787196,
+    "steps_count": 51,
+    "errors": []
+  },
+  {
+    "trial_name": "nestjs-docker-setup__jATu7RQ",
+    "success": true,
+    "cost": 0.059010400000000025,
+    "tokens": 3337791,
+    "steps_count": 112,
+    "errors": []
+  }
+]
